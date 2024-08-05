@@ -41,15 +41,11 @@ function App() {
           <Route
             path="/onebox"
             element={token ? <Onebox token={token} /> : <Login />}
-          >
-            {/* {token ? <Onebox token={token} /> : <redirect to="/" />} */}
-          </Route>
+          ></Route>
           <Route
             path="/"
             element={token ? <Onebox token={token} /> : <Login />}
-          >
-            {/* {token ? <redirect to="/onebox" /> : <Login />} */}
-          </Route>
+          ></Route>
         </Routes>
       </Router>
     </div>
