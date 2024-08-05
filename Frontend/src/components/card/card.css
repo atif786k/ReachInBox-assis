@@ -1,0 +1,128 @@
+.card-container {
+  border-top: 2px solid #33383f;
+  margin-top: 6px;
+  padding: 8px 2px;
+  cursor: pointer;
+}
+.main-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-title h1 {
+  font-size: 18px;
+  font-weight: 400;
+}
+.main-title h4,
+.subject-title,
+.span-content {
+  font-size: 14px;
+  font-weight: 400;
+}
+.span-content-div {
+  display: flex;
+  align-items: center;
+}
+.span-content {
+  margin-right: 8px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  border-radius: 25px;
+  background-color: #222426;
+}
+.green-dot {
+  height: 10px;
+  width: 10px;
+  margin-right: 8px;
+  border-radius: 100%;
+  background-color: greenyellow;
+}
+
+/* Detailed Card */
+.detail-card-container {
+  background-color: #141517;
+  padding: 18px;
+  border: 1px solid #33383f;
+  border-radius: 8px;
+}
+.card-upper-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-upper-div h1 {
+  font-size: 18px;
+  font-size: 500;
+}
+.email-details,
+.card-upper-div h4 {
+  color: grey;
+}
+
+/* Delete Card */
+.popup,
+.reply-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.popup-inner {
+  padding: 24px 32px;
+  border: 1px solid #17181b;
+  border-radius: 8px;
+  background-color: #17181b;
+  text-align: center;
+}
+.popup-inner h2 {
+  font-size: 32px;
+  font-weight: 700;
+}
+.btn-style {
+  padding: 18px 50px;
+  margin: 0px 8px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.delete-btn {
+  background-color: red;
+}
+.cancel-btn {
+  border: 1px solid #25262b;
+  background-color: #25262b;
+}
+
+/* Reply Card */
+.reply-popup-inner {
+  width: 700px;
+  background-color: #141517;
+  padding: 18px 0px;
+  border-radius: 8px;
+}
+.text-editor {
+  padding: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #33383f;
+}
+.reply-details li {
+  padding: 12px 18px;
+}
+.reply-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.input-fields {
+  outline: none;
+  background: transparent;
+}
