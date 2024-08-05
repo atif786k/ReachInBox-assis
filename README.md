@@ -1,4 +1,3 @@
-# ReachInBox-assis
 ReachInBox Web App
 This repository contains the implementation of a functional web application based on the provided designs and APIs for the ReachInBox assignment. The app features Google login, data fetching from an API, keyboard shortcuts, a custom text editor, and theme toggling between light and dark modes.
 
