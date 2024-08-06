@@ -2,21 +2,6 @@
   height: 100vh;
   width: 100vw;
 }
-.loading-div {
-  height: 100%;
-  width: 100%;
-  background-color: #000000;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.loading-animation {
-  height: 50px;
-  width: 50px;
-  background-color: white;
-  display: flex;
-}
 .theme-btn {
   margin-right: 40px;
   font-size: 32px;

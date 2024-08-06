@@ -6,6 +6,8 @@
   background-color: #000000;
   color: #ffffff;
 }
+
+/* Login Page */
 .main-login-container {
   height: 100%;
   width: 100%;
@@ -21,7 +23,7 @@
   padding: 12px 0px;
   position: fixed;
   top: 0;
-  border: 1px solid #33383f;
+  border-bottom: 1px solid #33383f;
   font-size: 18px;
   font-weight: 500;
   text-transform: uppercase;
@@ -69,13 +71,13 @@
   padding: 8px;
   position: fixed;
   bottom: 0;
-  border: 1px solid rgb(31, 31, 31);
+  border-top: 1px solid rgb(31, 31, 31);
   color: gray;
 }
 
 /* Loading-animation */
 .loading-div {
-  height: 100%;
+  height: calc(100% - 10%);
   width: 100%;
   display: flex;
   align-items: center;
@@ -89,7 +91,8 @@
 }
 
 /* OneBox */
-.onebox-container {
+.onebox-container,
+.home-container {
   height: 100%;
   width: 100%;
   position: relative;

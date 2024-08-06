@@ -19,8 +19,10 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { BsArrowsExpand } from "react-icons/bs";
 import { FaReply } from "react-icons/fa6";
 import { FaInbox } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import Home from "./Home";
 
-const OneBox = ({ token }) => {
+const OneBox = ({ token, Id }) => {
   const [items, setItems] = useState([]);
   const [oneThread, setOneThread] = useState([]);
   const [selectedThread, setSelectedThread] = useState(null);
@@ -69,7 +71,7 @@ const OneBox = ({ token }) => {
       setOneThread(response.data.data);
       setSelectedThread(thread_id);
       setError(null);
-      console.log("Single Thread: ", response.data.data);
+      // console.log("Single Thread: ", response.data.data);
     } catch (error) {
       console.log(
         "Failed to fetch thread: ",
@@ -141,23 +143,15 @@ const OneBox = ({ token }) => {
     };
   }, [token, handleKeyDown]);
 
-  if (loading) {
-    return (
-      <div className="loading-div space-x-6">
-        <p className="loading-animation animate-spin"></p>
-        <p className="loading-animation animate-spin"></p>
-        <p className="loading-animation animate-spin"></p>
-      </div>
-    );
-  }
-
   return (
     <main className={`onebox-container ${theme}`}>
       <nav className="side-nav">
         <img src="/images/reachinbox_ai_logo.jpeg" width="50px" alt="" />
         <ul className="side-nav-items space-y-12">
           <li>
-            <IoMdHome className="hover:text-gray-400" />
+            <Link to="/onebox/home">
+              <IoMdHome className="hover:text-gray-400" />
+            </Link>
           </li>
           <li>
             <IoMdContact className="hover:text-gray-400" />
@@ -172,7 +166,9 @@ const OneBox = ({ token }) => {
             <IoMdMenu className="hover:text-gray-400" />
           </li>
           <li>
-            <FaInbox className="hover:text-gray-400" />
+            <Link to="/onebox">
+              <FaInbox className="hover:text-gray-400" />
+            </Link>
           </li>
         </ul>
         <p className="user-profile-initials">AS</p>
@@ -185,170 +181,182 @@ const OneBox = ({ token }) => {
             Atif's Workspace
           </h2>
         </nav>
-        <div className="vertical-div">
-          <div className="list-items space-y-4">
-            <h1 className="text-blue-600">
-              All Inbox(s)
-              <MdKeyboardArrowDown className="text-2xl ml-2" />
-            </h1>
-            <h4 className="text-gray-400">
-              <span className=" text-white text-[18px]">{items.length}/25</span>{" "}
-              inboxes selected
-            </h4>
-            <div className="relative">
-              <IoMdSearch className="absolute top-[7px] left-3 text-xl" />
-              <input
-                type="text"
-                name="search"
-                id="search"
-                className="search-field"
-              />
-            </div>
-            <h4>
-              <span className="text-blue-600">{items.length}</span> New Replies
-            </h4>
-            {items.map((e) => {
-              return (
-                <div key={e.id} onClick={() => singleThread(e.threadId)}>
-                  <MailCard
-                    fromEmail={e.fromEmail}
-                    subject={e.subject}
-                    sentAt={e.sentAt}
-                    isRead={e.isRead}
-                    threadID={e.threadId}
-                  />
-                </div>
-              );
-            })}
+
+        {loading === true ? (
+          <div className="loading-div space-x-6">
+            <p className="loading-animation animate-spin"></p>
+            <p className="loading-animation animate-spin"></p>
+            <p className="loading-animation animate-spin"></p>
           </div>
-          <div className="list-item-detail">
-            <div className="upper-div border-b border-[#33383f]">
-              <div className="first-div">
-                <h1>Orlando</h1>
-                <h4>orlandom@gmail.com</h4>
+        ) : (
+          <div className="vertical-div">
+            <div className="list-items space-y-4">
+              <h1 className="text-blue-600">
+                All Inbox(s)
+                <MdKeyboardArrowDown className="text-2xl ml-2" />
+              </h1>
+              <h4 className="text-gray-400">
+                <span className=" text-white text-[18px]">
+                  {items.length}/25
+                </span>{" "}
+                inboxes selected
+              </h4>
+              <div className="relative">
+                <IoMdSearch className="absolute top-[7px] left-3 text-xl" />
+                <input
+                  type="text"
+                  name="search"
+                  id="search"
+                  className="search-field"
+                />
               </div>
-              <div className="second-div space-x-4">
-                <span className="box-span">
-                  <span className="yellow-dot"></span>Meeting Completed
-                  <MdKeyboardArrowDown className="text-2xl ml-2" />
-                </span>
-                <span className="box-span">
-                  More
-                  <MdKeyboardArrowDown className="text-2xl ml-2" />
-                </span>
-                <span className="box-span">...</span>
-              </div>
+              <h4>
+                <span className="text-blue-600">{items.length}</span> New
+                Replies
+              </h4>
+              {items.map((e) => {
+                return (
+                  <div key={e.id} onClick={() => singleThread(e.threadId)}>
+                    <MailCard
+                      fromEmail={e.fromEmail}
+                      subject={e.subject}
+                      sentAt={e.sentAt}
+                      isRead={e.isRead}
+                      threadID={e.threadId}
+                    />
+                  </div>
+                );
+              })}
             </div>
-            <section className="down-div space-y-4">
-              <h2 className="today-title absolute right-[47%]">Today</h2>
-              <hr className="border-[#33383f]" />
-              <br />
-              {oneThread.length > 0 ? (
-                oneThread.map((e) => {
-                  return (
-                    <div key={e.id}>
-                      <DetailCard
-                        subject={e.subject}
-                        sentAt={e.sentAt}
-                        fromEmail={e.fromEmail}
-                        toEmail={e.toEmail}
-                        body={e.body}
-                      />
-                    </div>
-                  );
-                })
-              ) : (
-                <DetailCard
-                  subject="New Product Launch"
-                  sentAt=""
-                  fromEmail="jeanne@icloud.com"
-                  toEmail=" lennon.j@mail.com"
-                  body="I would like to introduce you to SaaSgrow, a productized design service specifically tailored for saas startups. Our aim is to help you enhance the user experience and boost the visual appeal of your software products.y"
-                />
-              )}
-              <h2 className="expand absolute right-[41%]">
-                <BsArrowsExpand className="mr-2" />
-                View all 4 replies
-              </h2>
-              {replyPopUp && (
-                <ReplyCard
-                  sendReply={handleSendReply}
-                  onCancel={() => setReplyPopUp(false)}
-                />
-              )}
-              <button
-                onClick={() => setReplyPopUp(true)}
-                className="flex items-center content-center fixed bottom-10 border-none py-2 px-10 rounded-lg text-lg bg-gradient-to-r from-blue-900 to-blue-600"
-              >
-                <FaReply className="mr-2" />
-                Reply
-              </button>
+            <div className="list-item-detail">
+              <div className="upper-div border-b border-[#33383f]">
+                <div className="first-div">
+                  <h1>Orlando</h1>
+                  <h4>orlandom@gmail.com</h4>
+                </div>
+                <div className="second-div space-x-4">
+                  <span className="box-span">
+                    <span className="yellow-dot"></span>Meeting Completed
+                    <MdKeyboardArrowDown className="text-2xl ml-2" />
+                  </span>
+                  <span className="box-span">
+                    More
+                    <MdKeyboardArrowDown className="text-2xl ml-2" />
+                  </span>
+                  <span className="box-span">...</span>
+                </div>
+              </div>
+              <section className="down-div space-y-4">
+                <h2 className="today-title absolute right-[47%]">Today</h2>
+                <hr className="border-[#33383f]" />
+                <br />
+                {oneThread.length > 0 ? (
+                  oneThread.map((e) => {
+                    return (
+                      <div key={e.id}>
+                        <DetailCard
+                          subject={e.subject}
+                          sentAt={e.sentAt}
+                          fromEmail={e.fromEmail}
+                          toEmail={e.toEmail}
+                          body={e.body}
+                        />
+                      </div>
+                    );
+                  })
+                ) : (
+                  <DetailCard
+                    subject="New Product Launch"
+                    sentAt=""
+                    fromEmail="jeanne@icloud.com"
+                    toEmail=" lennon.j@mail.com"
+                    body="I would like to introduce you to SaaSgrow, a productized design service specifically tailored for saas startups. Our aim is to help you enhance the user experience and boost the visual appeal of your software products.y"
+                  />
+                )}
+                <h2 className="expand absolute right-[41%]">
+                  <BsArrowsExpand className="mr-2" />
+                  View all 4 replies
+                </h2>
+                {replyPopUp && (
+                  <ReplyCard
+                    sendReply={handleSendReply}
+                    onCancel={() => setReplyPopUp(false)}
+                  />
+                )}
+                <button
+                  onClick={() => setReplyPopUp(true)}
+                  className="flex items-center content-center fixed bottom-10 border-none py-2 px-10 rounded-lg text-lg bg-gradient-to-r from-blue-900 to-blue-600"
+                >
+                  <FaReply className="mr-2" />
+                  Reply
+                </button>
+              </section>
+            </div>
+            <section className="third-section space-y-6">
+              <h2 className="third-section-titles">Lead Details</h2>
+              <ul className="lead-detail-items space-y-4">
+                <li>
+                  <span>Name</span>
+                  <span>Orlando</span>
+                </li>
+                <li>
+                  <span>Contact No</span>
+                  <span>+54-9062827869</span>
+                </li>
+                <li>
+                  <span>Email ID</span>
+                  <span>orlando@gmail.com</span>
+                </li>
+                <li>
+                  <span>LinkedIn</span>
+                  <span>linkedin.com/in/timvadde/</span>
+                </li>
+                <li>
+                  <span>Company Name</span>
+                  <span>Reachinbox</span>
+                </li>
+              </ul>
+              <h2 className="third-section-titles">Activites</h2>
+              <h4>Campaign Name</h4>
+              <h5>3 Steps | 5 Days in Sequence</h5>
+              <ul className="activity-items space-y-4">
+                <li>
+                  <span className="mail-circle">
+                    <IoMdMail className="text-2xl" />
+                  </span>{" "}
+                  <span>
+                    <h5>Step 1: Email</h5>
+                    <h5>Sent 3rd, Feb</h5>
+                  </span>
+                </li>
+                <li>
+                  <span className="mail-circle">
+                    <IoMdMail className="text-2xl" />
+                  </span>{" "}
+                  <span>
+                    <h5>Step 2: Email</h5>
+                    <h5 className="open-mail">
+                      <IoMdMailOpen className="text-yellow-500 mr-2" />
+                      Open 5th, Feb
+                    </h5>
+                  </span>
+                </li>
+                <li>
+                  <span className="mail-circle">
+                    <IoMdMail className="text-2xl" />
+                  </span>{" "}
+                  <span>
+                    <h5>Step 3: Email</h5>
+                    <h5 className="open-mail">
+                      <IoMdMailOpen className="text-yellow-500 mr-2" />
+                      Open 5th, Feb
+                    </h5>
+                  </span>
+                </li>
+              </ul>
             </section>
           </div>
-          <section className="third-section space-y-6">
-            <h2 className="third-section-titles">Lead Details</h2>
-            <ul className="lead-detail-items space-y-4">
-              <li>
-                <span>Name</span>
-                <span>Orlando</span>
-              </li>
-              <li>
-                <span>Contact No</span>
-                <span>+54-9062827869</span>
-              </li>
-              <li>
-                <span>Email ID</span>
-                <span>orlando@gmail.com</span>
-              </li>
-              <li>
-                <span>LinkedIn</span>
-                <span>linkedin.com/in/timvadde/</span>
-              </li>
-              <li>
-                <span>Company Name</span>
-                <span>Reachinbox</span>
-              </li>
-            </ul>
-            <h2 className="third-section-titles">Activites</h2>
-            <h4>Campaign Name</h4>
-            <h5>3 Steps | 5 Days in Sequence</h5>
-            <ul className="activity-items space-y-4">
-              <li>
-                <span className="mail-circle">
-                  <IoMdMail className="text-2xl" />
-                </span>{" "}
-                <span>
-                  <h5>Step 1: Email</h5>
-                  <h5>Sent 3rd, Feb</h5>
-                </span>
-              </li>
-              <li>
-                <span className="mail-circle">
-                  <IoMdMail className="text-2xl" />
-                </span>{" "}
-                <span>
-                  <h5>Step 2: Email</h5>
-                  <h5 className="open-mail">
-                    <IoMdMailOpen className="text-yellow-500 mr-2" />
-                    Open 5th, Feb
-                  </h5>
-                </span>
-              </li>
-              <li>
-                <span className="mail-circle">
-                  <IoMdMail className="text-2xl" />
-                </span>{" "}
-                <span>
-                  <h5>Step 3: Email</h5>
-                  <h5 className="open-mail">
-                    <IoMdMailOpen className="text-yellow-500 mr-2" />
-                    Open 5th, Feb
-                  </h5>
-                </span>
-              </li>
-            </ul>
-          </section>
-        </div>
+        )}
       </div>
       {deletePopUp && (
         <DeleteCard
