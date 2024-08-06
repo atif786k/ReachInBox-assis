@@ -20,7 +20,6 @@ import { BsArrowsExpand } from "react-icons/bs";
 import { FaReply } from "react-icons/fa6";
 import { FaInbox } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Home from "./Home";
 
 const OneBox = ({ token, Id }) => {
   const [items, setItems] = useState([]);
@@ -92,6 +91,7 @@ const OneBox = ({ token, Id }) => {
       );
       fetchData();
       setError(null);
+      setDeletePopUp(false);
       // console.log(response.data.message);
     } catch (error) {
       console.log(
