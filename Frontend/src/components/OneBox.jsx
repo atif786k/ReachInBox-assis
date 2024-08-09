@@ -17,6 +17,7 @@ import {
 import { PiPaperPlaneTiltFill } from "react-icons/pi";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { BsArrowsExpand } from "react-icons/bs";
+import { IoReload } from "react-icons/io5";
 import { FaReply } from "react-icons/fa6";
 import { FaInbox } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -178,7 +179,7 @@ const OneBox = ({ token, Id }) => {
           <h2>Onebox</h2>
           <h2 className="flex items-center">
             <Theme theme={theme} toggleTheme={toggleTheme} />
-            Atif's Workspace
+            Atif's Workspace  <MdKeyboardArrowDown className="text-3xl ml-2" />
           </h2>
         </nav>
 
@@ -191,9 +192,14 @@ const OneBox = ({ token, Id }) => {
         ) : (
           <div className="vertical-div">
             <div className="list-items space-y-4">
-              <h1 className="text-blue-600">
-                All Inbox(s)
-                <MdKeyboardArrowDown className="text-2xl ml-2" />
+              <h1 className="flex justify-between items-center text-blue-600">
+                <span className="flex items-center">
+                  All Inbox(s)
+                  <MdKeyboardArrowDown className="text-2xl ml-2" />
+                </span>
+                <span className="reload-btn flex items-center justify-center">
+                  <IoReload className="text-[18px] text-white" />
+                </span>
               </h1>
               <h4 className="text-gray-400">
                 <span className=" text-white text-[18px]">
@@ -210,9 +216,14 @@ const OneBox = ({ token, Id }) => {
                   className="search-field"
                 />
               </div>
-              <h4>
-                <span className="text-blue-600">{items.length}</span> New
-                Replies
+              <h4 className="flex justify-between">
+                <span>
+                  <span className="text-blue-600">{items.length}</span> New
+                  Replies
+                </span>
+                <span className="flex">
+                  Newest <MdKeyboardArrowDown className="text-2xl ml-2" />
+                </span>
               </h4>
               {items.map((e) => {
                 return (
@@ -297,23 +308,23 @@ const OneBox = ({ token, Id }) => {
               <ul className="lead-detail-items space-y-4">
                 <li>
                   <span>Name</span>
-                  <span>Orlando</span>
+                  <span className="grey-color">Orlando</span>
                 </li>
                 <li>
                   <span>Contact No</span>
-                  <span>+54-9062827869</span>
+                  <span className="grey-color">+54-9062827869</span>
                 </li>
                 <li>
                   <span>Email ID</span>
-                  <span>orlando@gmail.com</span>
+                  <span className="grey-color">orlando@gmail.com</span>
                 </li>
                 <li>
                   <span>LinkedIn</span>
-                  <span>linkedin.com/in/timvadde/</span>
+                  <span className="grey-color">linkedin.com/in/timvadde/</span>
                 </li>
                 <li>
                   <span>Company Name</span>
-                  <span>Reachinbox</span>
+                  <span className="grey-color">Reachinbox</span>
                 </li>
               </ul>
               <h2 className="third-section-titles">Activites</h2>
@@ -326,7 +337,10 @@ const OneBox = ({ token, Id }) => {
                   </span>{" "}
                   <span>
                     <h5>Step 1: Email</h5>
-                    <h5>Sent 3rd, Feb</h5>
+                    <h5 className="open-mail">
+                      <PiPaperPlaneTiltFill className="mr-2" />
+                      Sent 3rd, Feb
+                    </h5>
                   </span>
                 </li>
                 <li>

@@ -28,7 +28,7 @@ const MailCard = (props) => {
         </span>
         <span className="span-content">
           {" "}
-          <PiPaperPlaneTiltFill />
+          <PiPaperPlaneTiltFill className="mr-2"/>
           Campaign Name
         </span>
       </div>

@@ -158,6 +158,12 @@
   font-size: 28px;
   font-weight: 600;
 }
+.reload-btn{
+  height: 40px;
+  width: 40px;
+  background-color: #23272c;
+  border-radius: 8px;
+}
 .search-field {
   width: 100%;
   height: 35px;
@@ -255,6 +261,9 @@
   display: flex;
   align-items: center;
   justify-content: start;
+}
+.grey-color{
+  color: grey;
 }
 .mail-circle {
   height: 50px;
