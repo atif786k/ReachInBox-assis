@@ -5,7 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 const Login = () => {
   const handleLogin = () => {
     window.location.href =
-      "https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=http://localhost:5173";
+      "https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=https://reach-in-box-assis.vercel.app/";
   };
   return (
     <main className="main-login-container">
